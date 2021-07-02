@@ -22,7 +22,7 @@ This module behaves as follows:
 
 * 3. Revert "tempfile-{lib, lib64}" to binary files in "$MODDIR/system/vendor/{lib, lib64}/libalsautils.so".
 
-* 4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils.so" onto "/vendor/{lib, lib64}/linalsautils.so"
+* 4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils.so" onto "/vendor/{lib, lib64}/libalsautils.so"
 
 
 Tested on LineageOS 18.1 based ROMs (Android 11).
