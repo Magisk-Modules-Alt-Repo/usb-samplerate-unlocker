@@ -1,6 +1,6 @@
 ## Unlocker for the USB audio class driver's limitaion (96kHz lock)
 
-This module behaves as follows:
+This Magisk module behaves as follows:
 
 * 1. hexdump "/vendor/{lib, lib64}/libalsautils.so" to "tempfile-{lib, lib64}"
        
