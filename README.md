@@ -25,7 +25,7 @@ This module behaves as follows:
 * 4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils.so" onto "/vendor/{lib, lib64}/libalsautils.so"
 
 
-Tested on LineageOS 18.1 based ROMs (Android 11).
+Tested on LineageOS 18.1 based ROMs (Android 11). See also my companion repository "USB_SampleRate_Changer" to change the sample rate of the USB audio class driver on the fly.
 
 ## DISCLAIMER
 
