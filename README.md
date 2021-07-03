@@ -1,4 +1,4 @@
-## Unlocker for the USB audio class driver's limitaion (96kHz lock) on Android devices
+## Unlocker for the USB audio class driver's limitaion (upto 96kHz lock) on Android devices
 
 This Magisk module behaves as follows:
 
@@ -26,7 +26,7 @@ hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 9
 * 4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils.so" onto "/vendor/{lib, lib64}/libalsautils.so"
 
 
-Tested on LineageOS 18.1 based ROMs (Android 11). See also my companion repository "USB_SampleRate_Changer" to change the sample rate of the USB audio class driver on the fly.
+Tested on LineageOS 18.1 based ROMs (Android 11). See also my companion script ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer) to change the sample rate of the USB audio class driver on the fly like Bluetooth LDAC or Windows mixer.
 * In details, see ["modules/usbaudio/audio_hal.c"](https://android.googlesource.com/platform/hardware/libhardware/+/master/modules/usbaudio/audio_hal.c), ["alsa_utils/alsa_device_profile.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_profile.c) and ["alsa_utils/alsa_device_proxy.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_proxy.c) in AOSP sources.
 
 ## DISCLAIMER
