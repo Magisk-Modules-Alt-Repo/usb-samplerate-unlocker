@@ -1,4 +1,4 @@
-## Unlocker for the USB audio class driver's limitaion (96kHz lock)
+## Unlocker for the USB audio class driver's limitaion (96kHz lock) on Android devices
 
 This Magisk module behaves as follows:
 
@@ -26,6 +26,7 @@ This Magisk module behaves as follows:
 
 
 Tested on LineageOS 18.1 based ROMs (Android 11). See also my companion repository "USB_SampleRate_Changer" to change the sample rate of the USB audio class driver on the fly.
+* In details, see "alsa_utils/alsa_device_proxy.c", "alsa_utils/alsa_device_profile.c" and "modules/usbaudio/audio_hal.c" in AOSP sources.
 
 ## DISCLAIMER
 
