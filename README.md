@@ -1,6 +1,6 @@
 ## Unlocker for the USB audio class driver's limitaion (upto 96kHz lock) on Android devices
 
-This Magisk module behaves as follows:
+This magisk module has been developed for recent music streaming services which output greater than 96kHz high resolution sound, and behaves as follows:
 
 * 1. hexdump "/vendor/{lib, lib64}/libalsautils.so" to "tempfile-{lib, lib64}"
        
