@@ -1,4 +1,4 @@
-## Unlocker for the USB audio class driver's limitaion (upto 96kHz lock) on Android devices
+## Unlocker for the USB audio class (USB HAL) driver's limitaion (upto 96kHz lock) on Android devices
 
 This magisk module has been developed for recent music streaming services which output greater than 96kHz high resolution sound, and behaves as follows:
 
@@ -30,6 +30,7 @@ hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 9
 
 This module has been tested on LineageOS based ROMs (Android 10&11) and ArrowOS (Android 11). See also my companion script ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer) to change the sample rate of the USB audio class driver on the fly like Bluetooth LDAC or Windows mixer.
 * In details, see ["modules/usbaudio/audio_hal.c"](https://android.googlesource.com/platform/hardware/libhardware/+/master/modules/usbaudio/audio_hal.c), ["alsa_utils/alsa_device_profile.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_profile.c) and ["alsa_utils/alsa_device_proxy.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_proxy.c) in AOSP sources.
+* If your device uses (USB) audio hardware offloading, its UAC driver is capable of outputing up to 384kHz. Probably you do not need this magisk module. Try ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer).
 
 ## DISCLAIMER
 
