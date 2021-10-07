@@ -1,4 +1,4 @@
-## Unlocker for the USB audio class (USB HAL) driver's limitaion (upto 96kHz lock) on Android devices
+## Unlocker for the USB audio class (USB HAL) driver's limitation (upto 96kHz lock) on Android devices
 
 This magisk module has been developed for recent music streaming services which output greater than 96kHz high resolution sound, and behaves as follows:
 
