@@ -22,8 +22,6 @@
   fi
   if [ -r "$MAGISKTMP/mirror/system/vendor/lib64/libalsautils.so" ]; then
     patchClearLock "$MAGISKTMP/mirror/system/vendor/lib64/libalsautils.so" "$MODDIR/system/vendor/lib64/libalsautils.so" "full"
-  elif [ -e "$MODDIR/system/vendor/lib64" ]; then
-    rm -rf "$MODDIR/system/vendor/lib64"
   fi
 
 # End of patch
