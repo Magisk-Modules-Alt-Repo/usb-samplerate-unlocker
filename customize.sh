@@ -15,8 +15,19 @@ for d in "/system/vendor/lib" "/system/vendor/lib64"; do
     fi
 done
 
+function replaceSystemProps()
+{
+    sed -i \
+        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=5600/' \
+            "$MODPATH/system.prop"
+}
+
 if "$IS64BIT"; then
-    :
+    case "`getprop ro.board.platform`" in
+        mt67[56]? )
+            replaceSystemProps
+            ;;
+    esac
 else
-    sed -i 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=5600/' "$MODPATH/system.prop"
+    replaceSystemProps
 fi
