@@ -2,17 +2,19 @@
 
 REPLACE=""
 for d in "/system/vendor/lib" "/system/vendor/lib64"; do
-    if [ -r "${d}/libalsautils.so" ]; then
-        mkdir -p "${MODPATH}${d}"
-        touch "${MODPATH}${d}/libalsautils.so"
-        chmod 644 "${MODPATH}${d}/libalsautils.so"
-        chmod -R a+rX "${MODPATH}${d}"
-        if [ -z "${REPLACE}" ]; then
-            REPLACE="${d}/libalsautils.so"
-        else
-            REPLACE="${REPLACE} ${d}/libalsautils.so"
+    for lname in "libalsautils.so" "libalsautilsv2.so"; do
+        if [ -r "${d}/${lname}" ]; then
+            mkdir -p "${MODPATH}${d}"
+            touch "${MODPATH}${d}/${lname}"
+            chmod 644 "${MODPATH}${d}/${lname}"
+            chmod -R a+rX "${MODPATH}${d}"
+            if [ -z "${REPLACE}" ]; then
+                REPLACE="${d}/${lname}"
+            else
+                REPLACE="${REPLACE} ${d}/${lname}"
+            fi
         fi
-    fi
+    done
 done
 
 function replaceSystemProps()
