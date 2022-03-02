@@ -13,9 +13,9 @@
 # In some cases, the former may link to overlaied "/system/vendor" by Magisk itself (not mirrored original one).
 
 # This script will be executed in post-fs-data mode
-#   "full" below this line means "upto 386kHz unlock";
-#    for "upto 768kHz unlock", replace "full" with "max" below this line;
-#    for "upto 192kHz unlock", replace "full" with "default" below this line.
+#   "full" below this line means "up to 386kHz unlock";
+#    for "up to 768kHz unlock", replace "full" with "max" below this line;
+#    for "up to 192kHz unlock", replace "full" with "default" below this line.
 
     .  "$MODDIR/functions2.sh"
 
