@@ -25,7 +25,7 @@ hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 9
 
 * 4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so" onto "/vendor/{lib, lib64}/libalsautils{,v2}.so"
 
-* Remark: This module unlocks up to 384kHz unless you have modified "post-fs-data.sh" in its zip file (or "post-fs-data.sh" installed in its "$MODDIR" on your device). up to 768kHz unlocking may stutter sound on your device. If you need to automatically connect 192kHz (instead of 384kHz) to your USB DAC, please modify the "post-fs-data.sh" (in this file, "max", "full" and "default" mean "up to 768kHz", "up to 384kHz" and "up to 192kHz" unlocking, respectively).
+* Remark: This module unlocks up to 384kHz unless you have modified "post-fs-data.sh" in its zip file (or "post-fs-data.sh" installed in its "$MODDIR" on your device). Up to 768kHz unlocking may stutter sound on your device. If you need to automatically connect 192kHz (instead of 384kHz) to your USB DAC, please modify the "post-fs-data.sh" (in this file, "max", "full" and "default" mean "up to 768kHz", "up to 384kHz" and "up to 192kHz" unlocking, respectively).
 
 
 * This module has been tested on LineageOS based ROMs (Android 10 & 11) and ArrowOS (Android 11 & 12). See also my companion script ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer) to change the sample rate of the USB audio class driver and a 3.5mm jack on the fly like Bluetooth LDAC or Windows mixer.
