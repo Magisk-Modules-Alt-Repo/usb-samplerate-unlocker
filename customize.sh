@@ -24,8 +24,41 @@ function replaceSystemProps()
             "$MODPATH/system.prop"
 }
 
+function replaceSystemProps_Kona()
+{
+    sed -i \
+        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=20000/' \
+            "$MODPATH/system.prop"
+}
+
+function unlocking_notice()
+{
+    ui_print ""
+    ui_print "********************************************"
+    ui_print " Up to 768kHz unlocking will be applied! "
+    ui_print "   (a known safe device is detected) "
+    ui_print "********************************************"
+    ui_print ""
+}
+
+function enableMaxFrequency()
+{
+    sed -i \
+        -e 's/"full"$/"max"/' \
+            "$MODPATH/post-fs-data.sh"
+            
+    unlocking_notice
+}
+
 if "$IS64BIT"; then
     case "`getprop ro.board.platform`" in
+        "kona" )
+            replaceSystemProps_Kona
+            enableMaxFrequency
+            ;;
+        "sdm660" | "sdm845" )
+            enableMaxFrequency
+            ;;
         mt67[56]? )
             replaceSystemProps
             ;;
