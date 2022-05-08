@@ -20,7 +20,7 @@ done
 function replaceSystemProps()
 {
     sed -i \
-        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=5600/' \
+        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=5375/' \
             "$MODPATH/system.prop"
 }
 
@@ -28,6 +28,13 @@ function replaceSystemProps_Kona()
 {
     sed -i \
         -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=20375/' \
+            "$MODPATH/system.prop"
+}
+
+function replaceSystemProps_MT68()
+{
+    sed -i \
+        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=1125/' \
             "$MODPATH/system.prop"
 }
 
@@ -58,6 +65,9 @@ if "$IS64BIT"; then
             ;;
         "sdm660" | "sdm845" )
             enableMaxFrequency
+            ;;
+        mt68* )
+            replaceSystemProps_MT68
             ;;
         mt67[56]? )
             replaceSystemProps
