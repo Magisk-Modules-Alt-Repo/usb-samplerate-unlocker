@@ -17,10 +17,10 @@ for d in "/system/vendor/lib" "/system/vendor/lib64"; do
     done
 done
 
-function replaceSystemProps()
+function replaceSystemProps_Old()
 {
     sed -i \
-        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=5375/' \
+        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=3875/' \
             "$MODPATH/system.prop"
 }
 
@@ -31,10 +31,10 @@ function replaceSystemProps_Kona()
             "$MODPATH/system.prop"
 }
 
-function replaceSystemProps_MT68()
+function replaceSystemProps_MTK_some()
 {
     sed -i \
-        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=1125/' \
+        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=875/' \
             "$MODPATH/system.prop"
 }
 
@@ -67,12 +67,14 @@ if "$IS64BIT"; then
             enableMaxFrequency
             ;;
         mt68* )
-            replaceSystemProps_MT68
+            if [ "`getprop ro.vendor.build.version.release`" -ge "11" ]; then
+                replaceSystemProps_MTK_some
+            fi
             ;;
-        mt67[56]? )
-            replaceSystemProps
+        mt67[56]* )
+            replaceSystemProps_Old
             ;;
     esac
 else
-    replaceSystemProps
+    replaceSystemProps_Old
 fi

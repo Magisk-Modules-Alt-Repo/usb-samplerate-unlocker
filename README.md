@@ -48,4 +48,7 @@ hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 9
 # v1.2
 * arm (32bit) bug fixed ("/vendor/lib64/libalsautils.so" phantom overlay makes stutters on arm devices)
 
+# v1.3
+* Added new properties related to an audio scheduling
+
 ##
