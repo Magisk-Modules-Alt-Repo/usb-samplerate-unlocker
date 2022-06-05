@@ -30,7 +30,7 @@ hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 9
 
 * This module has been tested on LineageOS based ROMs (Android 10 & 11) and ArrowOS (Android 11 & 12). See also my companion script ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer) to change the sample rate of the USB audio class driver and a 3.5mm jack on the fly like Bluetooth LDAC or Windows mixer.
 * In details, see ["modules/usbaudio/audio_hal.c"](https://android.googlesource.com/platform/hardware/libhardware/+/master/modules/usbaudio/audio_hal.c), ["alsa_utils/alsa_device_profile.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_profile.c) and ["alsa_utils/alsa_device_proxy.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_proxy.c) in AOSP sources.
-* If your device uses (USB) audio hardware offloading, its UAC driver is capable of outputting up to 384kHz for Qcomm devices and 96kHz for MTK devices. So you may not need this magisk module for Qcomm devices unless considering jitter distortion. Try ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer).
+* If your device uses (USB) audio hardware offloading, its UAC driver is capable of outputting up to 384kHz for Qcomm devices and 96kHz for MTK and Tensor devices. So you may not need this magisk module for Qcomm devices unless considering jitter distortion. Try ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer).
 <br/>
 
 ## DISCLAIMER
