@@ -51,4 +51,7 @@ hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 9
 # v1.3
 * Added new properties related to an audio scheduling
 
+# v1.4
+* Added a workaround for Android 12 SELinux bug w.r.t. "ro.audio.usb.period_us" property
+
 ##

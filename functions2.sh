@@ -23,6 +23,29 @@ function toHexLineLE()
     fi
 }
 
+function toHexString()
+{
+    if [ $# -ge 1 ]; then
+        local tmp
+        tmp=`echo -n "$1" | xxd -p | tr -d ' \n'`
+        if [ $# -eq 2 ]; then
+            if [ ${#tmp} -ge $2 ]; then
+                echo -n ${tmp:0:$2}
+            else
+                local strt=`expr ${#tmp} + 1`
+                echo -n "$tmp"
+                for i in `seq $strt $2` ; do
+                    echo -n "0"
+                done
+            fi
+        else
+            echo -n "$tmp"
+        fi
+    else
+      return 1
+    fi
+}
+
 # Patch libalsautils.so to clear the 96kHz lock of USB audio class drivers
 #   arg1: original libalsautils.so file;  arg2: patched libalsautils.so file; 
 #     optional arg3: "max" (clearing upto 768kHz), "full" (clearing upto 386kHz), "default" or others (clearing upto 192kHz)
@@ -48,7 +71,11 @@ function patchClearLock()
       local pat1=`toHexLineLE "$orig_rates"`
       local pat2=`toHexLineLE "$new_rates"`
       
-      xxd -p <"$1" | tr -d ' \n' | sed -e "s/$pat1/$pat2/" \
+      # A workaroud for a SELinux permission bug on Android 12
+      local prop1=`toHexString "ro.audio.usb.period_us"`
+      local prop2=`toHexString "vendor.audio.usb.perio"`
+      
+      xxd -p <"$1" | tr -d ' \n' | sed -e "s/$prop1/$prop2/" -e "s/$pat1/$pat2/" \
           | awk 'BEGIN {
                  foldWidth=60
                  getline buf

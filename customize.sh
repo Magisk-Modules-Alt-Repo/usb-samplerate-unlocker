@@ -20,21 +20,28 @@ done
 function replaceSystemProps_Old()
 {
     sed -i \
-        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=3875/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=3250/' \
             "$MODPATH/system.prop"
 }
 
 function replaceSystemProps_Kona()
 {
     sed -i \
-        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=20375/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=20375/' \
             "$MODPATH/system.prop"
 }
 
-function replaceSystemProps_MTK_some()
+function replaceSystemProps_SDM()
 {
     sed -i \
-        -e 's/ro\.audio\.usb\.period_us=.*$/ro\.audio\.usb\.period_us=875/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2625/' \
+            "$MODPATH/system.prop"
+}
+
+function replaceSystemProps_MTK_Dimensity()
+{
+    sed -i \
+        -e '$avendor.audio.usb.out.period_us=3250\nvendor.audio.usb.out.period_count=2' \
             "$MODPATH/system.prop"
 }
 
@@ -43,7 +50,7 @@ function unlocking_notice()
     ui_print ""
     ui_print "********************************************"
     ui_print " Up to 768kHz unlocking will be applied! "
-    ui_print "   (a known safe device is detected) "
+    ui_print "   (a known safe device was detected) "
     ui_print "********************************************"
     ui_print ""
 }
@@ -58,17 +65,19 @@ function enableMaxFrequency()
 }
 
 if "$IS64BIT"; then
-    case "`getprop ro.board.platform`" in
+    local board="`getprop ro.board.platform`"
+    case "$board" in
         "kona" )
             replaceSystemProps_Kona
             enableMaxFrequency
             ;;
         "sdm660" | "sdm845" )
+            replaceSystemProps_SDM
             enableMaxFrequency
             ;;
         mt68* )
-            if [ "`getprop ro.vendor.build.version.release`" -ge "11" ]; then
-                replaceSystemProps_MTK_some
+            if [ -r "/vendor/lib64/hw/audio.usb.${board}.so" ]; then
+                replaceSystemProps_MTK_Dimensity
             fi
             ;;
         mt67[56]* )
