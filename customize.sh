@@ -20,7 +20,7 @@ done
 function replaceSystemProps_Old()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=3250/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=3875/' \
             "$MODPATH/system.prop"
 }
 
