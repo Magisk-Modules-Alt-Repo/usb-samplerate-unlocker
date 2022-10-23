@@ -21,7 +21,7 @@ hexdumped "std_sample_rates[]={384000, 352800, 192000, 176400, 96000, 88200, 480
 hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 96000, 88200, 48000, 44100, 24000, 16000, 8000}" (up to 768kHz lock).
 ```
 
-* 3. Revert "tempfile{,v2}-{lib, lib64}" to binary files in "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so".
+* 3. Revert "tempfile{,v2}-{lib, lib64}" to each binary file "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so".
 
 * 4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so" onto "/vendor/{lib, lib64}/libalsautils{,v2}.so"
 
