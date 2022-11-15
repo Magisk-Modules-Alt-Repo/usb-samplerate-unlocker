@@ -2,9 +2,10 @@
 
 This magisk module has been developed for recent music streaming services which output greater than 96kHz high resolution sound, and behaves as follows:
 
-* 1. hexdump "/vendor/{lib, lib64}/libalsautils{,v2}.so" to "tempfile{,v2}-{lib, lib64}"
+1. Hexdump "/vendor/{lib, lib64}/libalsautils{,v2}.so" to "tempfile{,v2}-{lib, lib64}"
        
-* 2. edit "tempfile{,v2}-{lib, lib64}" to replace
+2. Edit "tempfile{,v2}-{lib, lib64}" to replace
+
 ```
 hexdumped "std_sample_rates[]={96000, 88200, 192000, 176400, 48000, 44100, 32000, 24000, 22050, 16000, 12000, 11025, 8000}" (up to 96kHz lock)
 
@@ -21,9 +22,10 @@ hexdumped "std_sample_rates[]={384000, 352800, 192000, 176400, 96000, 88200, 480
 hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 96000, 88200, 48000, 44100, 24000, 16000, 8000}" (up to 768kHz lock).
 ```
 
-* 3. Revert "tempfile{,v2}-{lib, lib64}" to each binary file "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so".
+3. Revert "tempfile{,v2}-{lib, lib64}" to each binary file "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so".
 
-* 4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so" onto "/vendor/{lib, lib64}/libalsautils{,v2}.so"
+4. Overlay "$MODDIR/system/vendor/{lib, lib64}/libalsautils{,v2}.so" onto "/vendor/{lib, lib64}/libalsautils{,v2}.so"
+</br>
 
 * Remark: This module unlocks up to 384kHz unless you have modified "post-fs-data.sh" in its zip file (or "post-fs-data.sh" installed in its "$MODDIR" on your device) except some known devices which don't stutter at 768kHz & 32bit mode. Up to 768kHz unlocking may stutter sound on your device. If you need to automatically connect 192kHz (instead of 384kHz) to your USB DAC, please modify the "post-fs-data.sh" (in this file, "max", "full" and "default" mean "up to 768kHz", "up to 384kHz" and "up to 192kHz" unlocking, respectively).
 
