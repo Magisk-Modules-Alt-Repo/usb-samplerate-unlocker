@@ -26,8 +26,21 @@ function replaceSystemProps_Old()
 
 function replaceSystemProps_Kona()
 {
+    if [ "`getprop ro.vendor.build.version.release_or_codename`" -ge "12" ]; then
+        sed -i \
+            -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2500/' \
+                "$MODPATH/system.prop"
+    else
+        sed -i \
+            -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=20375/' \
+                "$MODPATH/system.prop"
+    fi
+}
+
+function replaceSystemProps_SDM845()
+{
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=20375/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2500/' \
             "$MODPATH/system.prop"
 }
 
@@ -41,7 +54,8 @@ function replaceSystemProps_SDM()
 function replaceSystemProps_MTK_Dimensity()
 {
     sed -i \
-        -e '$avendor.audio.usb.out.period_us=3250\nvendor.audio.usb.out.period_count=2' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2500/' \
+        -e '$avendor.audio.usb.out.period_us=2500\nvendor.audio.usb.out.period_count=2' \
             "$MODPATH/system.prop"
 }
 
@@ -71,13 +85,21 @@ if "$IS64BIT"; then
             replaceSystemProps_Kona
             enableMaxFrequency
             ;;
-        "sdm660" | "sdm845" )
+        "sdm845" )
+            replaceSystemProps_SDM845
+            enableMaxFrequency
+            ;;
+        "sdm660" )
             replaceSystemProps_SDM
             enableMaxFrequency
             ;;
         mt68* )
             if [ -r "/vendor/lib64/hw/audio.usb.${board}.so" ]; then
                 replaceSystemProps_MTK_Dimensity
+            elif [ "`getprop ro.vendor.build.version.release`" -ge "12"  -o  "`getprop ro.vendor.build.version.release_or_codename`" -ge "12" ]; then
+                # Latest MTK kernels are capable of the 768kHz 32bit mode output, and set to be a hardware offload tunneling mode as default
+                replaceSystemProps_MTK_Dimensity
+                enableMaxFrequency
             fi
             ;;
         mt67[56]* )
