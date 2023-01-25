@@ -1,5 +1,7 @@
 vendor.audio.usb.perio=3250
-audio.adm.buffering.ms=2
-vendor.audio.adm.buffering.ms=2
+vendor.audio.usb.out.period_us=3250
+vendor.audio.usb.out.period_count=2
 audio_hal.period_multiplier=1
 vendor.audio_hal.period_multiplier=1
+audio.adm.buffering.ms=2
+vendor.audio.adm.buffering.ms=2
