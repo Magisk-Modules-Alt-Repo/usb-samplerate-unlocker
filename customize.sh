@@ -7,6 +7,8 @@ for d in "/system/vendor/lib" "/system/vendor/lib64"; do
             mkdir -p "${MODPATH}${d}"
             touch "${MODPATH}${d}/${lname}"
             chmod 644 "${MODPATH}${d}/${lname}"
+            chcon u:object_r:vendor_file:s0 "${MODPATH}${d}/${lname}"
+            chown root:root "${MODPATH}${d}/${lname}"
             chmod -R a+rX "${MODPATH}${d}"
             if [ -z "${REPLACE}" ]; then
                 REPLACE="${d}/${lname}"
@@ -29,8 +31,8 @@ function replaceSystemProps_Kona()
 {
     if [ "`getprop ro.vendor.build.version.release_or_codename`" -ge "12" ]; then
         sed -i \
-            -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2500/' \
-            -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2500/' \
+            -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=3500/' \
+            -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=3500/' \
                 "$MODPATH/system.prop"
     else
         sed -i \
