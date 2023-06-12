@@ -1,8 +1,16 @@
-# Making dummies for replacing libalsautils.so's
+#
+
+# no longer assume $MAGISKTMP=/sbin/.magisk if Android 11 or later
+    MAGISKTMP="$(magisk --path)/.magisk"
+
+# Note: Don't use "${MAGISKTMP}/mirror/system/vendor/*" instaed of "${MAGISKTMP}/mirror/vendor/*".
+# In some cases, the former may link to overlaied "/system/vendor" by Magisk itself (not mirrored original one).
+
+# Making dummies for replacing libalsautils.so's and audio_usb_aoc.so's
 
 REPLACE=""
 for d in "/system/vendor/lib" "/system/vendor/lib64"; do
-    for lname in "libalsautils.so" "libalsautilsv2.so"; do
+    for lname in "libalsautils.so" "libalsautilsv2.so" "audio_usb_aoc.so"; do
         if [ -r "${d}/${lname}" ]; then
             mkdir -p "${MODPATH}${d}"
             touch "${MODPATH}${d}/${lname}"
@@ -18,6 +26,23 @@ for d in "/system/vendor/lib" "/system/vendor/lib64"; do
         fi
     done
 done
+
+fname="/system/vendor/etc/audio_platform_configuration.xml"
+if [ -r "$fname" ]; then
+    mkdir -p "${MODPATH}${fname%/*}"
+    sed -e 's/min_rate="[1-9][0-9]*"/min_rate="44100"/g' \
+        -e 's/"MaxSamplingRate=[1-9][0-9]*,/"MaxSamplingRate=192000,/' <"${MAGISKTMP}/mirror${fname#/system}" >"${MODPATH}${fname}"
+    touch "${MODPATH}${fname}"
+    chmod 644 "${MODPATH}${fname}"
+    chcon u:object_r:vendor_file:s0 "${MODPATH}${fname}"
+    chown root:root "${MODPATH}${fname}"
+    chmod -R a+rX "${MODPATH}${fname}"
+    if [ -z "${REPLACE}" ]; then
+        REPLACE="${fname}"
+    else
+        REPLACE="${REPLACE} ${fname}"
+    fi
+fi
 
 function replaceSystemProps_Old()
 {
@@ -53,8 +78,8 @@ function replaceSystemProps_SDM845()
 function replaceSystemProps_SDM()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2625/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2625/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2500/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2500/' \
             "$MODPATH/system.prop"
 }
 
@@ -88,15 +113,15 @@ function enableMaxFrequency()
 if "$IS64BIT"; then
     local board="`getprop ro.board.platform`"
     case "$board" in
-        "kona" )
+        "kona" | "kalama" | "shima" | "yupik" )
             replaceSystemProps_Kona
             enableMaxFrequency
             ;;
-        "sdm845" )
+        "sdm845" | gs* )
             replaceSystemProps_SDM845
             enableMaxFrequency
             ;;
-        "sdm660" )
+        "sdm660" | "bengal" | "holi" )
             replaceSystemProps_SDM
             enableMaxFrequency
             ;;

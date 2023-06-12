@@ -1,5 +1,9 @@
 ## Change logs
 
+# v1.5.1
+* Reduced the jitter of Tensor's offload driver for USB DAC's
+* Unlocked the limiter of Tensor's offload driver from 96kHz to 192kHz, until now
+
 # v1.5.0
 * Fixed some SELinux related bugs for Magisk v26.0's new magic mount feature
 

@@ -26,5 +26,13 @@
             fi
         done
     done
+    
+    for lname in "audio_usb_aoc.so"; do
+        for ld in "lib" "lib64"; do
+            if [ -r "${MAGISKTMP}/mirror/vendor/${ld}/${lname}"  -a  -w "${MODDIR}/system/vendor/${ld}/${lname}" ]; then
+                patchClearTensorOffloadLock "${MAGISKTMP}/mirror/vendor/${ld}/${lname}" "${MODDIR}/system/vendor/${ld}/${lname}"
+            fi
+        done
+    done
 
 # End of patch

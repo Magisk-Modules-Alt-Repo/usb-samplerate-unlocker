@@ -29,6 +29,7 @@ hexdumped "std_sample_rates[]={768000, 705600, 384000, 352800, 192000, 176400, 9
 
 * Remark: This module unlocks up to 384kHz unless you have modified "post-fs-data.sh" in its zip file (or "post-fs-data.sh" installed in its "$MODDIR" on your device) except some known devices which don't stutter at 768kHz & 32bit mode. Up to 768kHz unlocking may stutter sound on your device. If you need to automatically connect 192kHz (instead of 384kHz) to your USB DAC, please modify the "post-fs-data.sh" (in this file, "max", "full" and "default" mean "up to 768kHz", "up to 384kHz" and "up to 192kHz" unlocking, respectively).
 
+* Note: This module unlocks the limiter of Tensor device's USB offload driver from 96kHz to 192kHz by modifying "/vendor/etc/audio_platofrm_configuration.xml".
 
 * This module has been tested on LineageOS based ROMs (Android 10 ~ 13) and ArrowOS (Android 11 ~ 13). See also my companion script ["USB_SampleRate_Changer"](https://github.com/yzyhk904/USB_SampleRate_Changer) to change the sample rate of the USB audio class driver and a 3.5mm jack on the fly like Bluetooth LDAC or Windows mixer.
 * In details, see ["modules/usbaudio/audio_hal.c"](https://android.googlesource.com/platform/hardware/libhardware/+/master/modules/usbaudio/audio_hal.c), ["alsa_utils/alsa_device_profile.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_profile.c) and ["alsa_utils/alsa_device_proxy.c"](https://android.googlesource.com/platform/system/media/+/master/alsa_utils/alsa_device_proxy.c) in AOSP sources.
