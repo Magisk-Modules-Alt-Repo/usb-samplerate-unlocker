@@ -1,13 +1,10 @@
 #!/system/bin/sh
 # Do NOT assume where your module will be located.
-# ALWAYS use $MODDIR if you need to know where this script
-# and module is placed.
-# This will make sure your module will still work
-# if Magisk change its mount point in the future
-    MODDIR=${0%/*}
+# ALWAYS use $MODDIR if you need to know where this script and module are placed.
+# This will make sure your module will still work if Magisk changes its mount point in the future
 
-# no longer assume $MAGISKTMP=/sbin/.magisk if Android 11 or later
-    MAGISKTMP="$(magisk --path)/.magisk"
+MODDIR=${0%/*}
+MAGISKTMP="$(magisk --path)/.magisk"
 
 # Note: Don't use "${MAGISKTMP}/mirror/system/vendor/*" instaed of "${MAGISKTMP}/mirror/vendor/*".
 # In some cases, the former may link to overlaied "/system/vendor" by Magisk itself (not mirrored original one).

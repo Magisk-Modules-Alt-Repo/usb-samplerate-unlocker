@@ -1,7 +1,6 @@
 #
 
-# no longer assume $MAGISKTMP=/sbin/.magisk if Android 11 or later
-    MAGISKTMP="$(magisk --path)/.magisk"
+MAGISKTMP="$(magisk --path)/.magisk"
 
 # Note: Don't use "${MAGISKTMP}/mirror/system/vendor/*" instaed of "${MAGISKTMP}/mirror/vendor/*".
 # In some cases, the former may link to overlaied "/system/vendor" by Magisk itself (not mirrored original one).
@@ -83,6 +82,14 @@ function replaceSystemProps_SDM()
             "$MODPATH/system.prop"
 }
 
+function replaceSystemProps_Tensor()
+{
+    sed -i \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2500/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2500/' \
+            "$MODPATH/system.prop"
+}
+
 function replaceSystemProps_MTK_Dimensity()
 {
     sed -i \
@@ -117,10 +124,13 @@ if "$IS64BIT"; then
             replaceSystemProps_Kona
             enableMaxFrequency
             ;;
-        "sdm845" | gs* )
+        "sdm845" )
             replaceSystemProps_SDM845
             enableMaxFrequency
             ;;
+        gs* )
+            replaceSystemProps_Tensor
+             ;;
         "sdm660" | "bengal" | "holi" )
             replaceSystemProps_SDM
             enableMaxFrequency
