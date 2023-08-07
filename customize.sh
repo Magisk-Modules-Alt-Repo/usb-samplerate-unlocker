@@ -53,17 +53,10 @@ function replaceSystemProps_Old()
 
 function replaceSystemProps_Kona()
 {
-    if [ "`getprop ro.vendor.build.version.release_or_codename`" -ge "12" ]; then
-        sed -i \
-            -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=3500/' \
-            -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=3500/' \
-                "$MODPATH/system.prop"
-    else
-        sed -i \
-            -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=20375/' \
-            -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=20375/' \
-                "$MODPATH/system.prop"
-    fi
+    sed -i \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=20375/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=20375/' \
+            "$MODPATH/system.prop"
 }
 
 function replaceSystemProps_SDM845()
@@ -93,8 +86,8 @@ function replaceSystemProps_Tensor()
 function replaceSystemProps_MTK_Dimensity()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2500/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2500/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2625/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2625/' \
             "$MODPATH/system.prop"
 }
 
