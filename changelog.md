@@ -1,5 +1,8 @@
 ## Change logs
 
+# v1.5.2
+* Tuned USB transfer period sizes
+
 # v1.5.1
 * Reduced the jitter of Tensor device's offload driver for USB DAC's
 * Unlocked the limiter of Tensor device's offload driver from 96kHz to 192kHz, until now
