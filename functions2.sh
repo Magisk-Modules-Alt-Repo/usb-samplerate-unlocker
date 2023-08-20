@@ -73,7 +73,7 @@ function patchClearLock()
       
         # A workaroud for a SELinux permission bug on Android 12
         local prop1=`toHexString "ro.audio.usb.period_us"`
-        local prop2=`toHexString "vendor.audio.usb.perio"`
+        local prop2=`toHexString "vendor.audio.usb.period"`
       
         xxd -p <"$1" | tr -d ' \n' | sed -e "s/$prop1/$prop2/" -e "s/$pat1/$pat2/" \
             | awk 'BEGIN {
