@@ -1,5 +1,8 @@
 ## Change logs
 
+# v1.5.3
+* Tuned USB transfer period sizes
+
 # v1.5.2
 * Tuned USB transfer period sizes
 
