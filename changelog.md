@@ -1,5 +1,8 @@
 ## Change logs
 
+# v1.5.4
+* Added Tensor 3 support 
+
 # v1.5.3
 * Tuned USB transfer period sizes
 
