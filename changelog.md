@@ -1,5 +1,9 @@
 ## Change logs
 
+# v1.5.4
+* Tuned the USB period size for Tensor devices (2625 usec to 2250 usec)
+* Fixed for Pixel 8's
+
 # v1.5.3
 * Tuned USB transfer period sizes
 
