@@ -152,7 +152,9 @@ function patchClearTensorOffloadLock()
         local ul1=`toHexLineLE "192000"`
         local ul2=`toHexLineLE "768000"`
           
-        xxd -p <"$1" | tr -d ' \n' | sed -e "s/$ul1/$ul2/" -e "s/$prop1/$prop2/" -e "s/$pat1/$pat2/" \
+#        Don't work yet. Need more inviestigations
+#        xxd -p <"$1" | tr -d ' \n' | sed -e "s/$prop1/$prop2/" -e "s/$ul1/$ul2/" -e "s/$pat1/$pat2/" \
+        xxd -p <"$1" | tr -d ' \n' | sed -e "s/$prop1/$prop2/" \
             | awk 'BEGIN {
                  foldWidth=60
                  getline buf
