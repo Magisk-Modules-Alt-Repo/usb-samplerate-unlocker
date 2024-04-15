@@ -1,4 +1,6 @@
-#
+#!/system/bin/sh
+
+[ -z "$(magisk --path)" ] && alias magisk='ksu-magisk'
 
 # Check whether Magisk magic mount compatible or not
 function isMagiskMountCompatible()
@@ -14,7 +16,12 @@ function isMagiskMountCompatible()
 }
 
 if ! isMagiskMountCompatible; then
-    abort "  ***  Aborted by an incompatible Magisk variant detection. Try again with pure Magisk! ***"
+    abort '  ***
+  Aborted by no Magisk-mirrors:
+    Try again
+      a.) with official Magisk (mounting mirrors)
+      b.) after installing "compatible Magisk-mirroring" Magisk module
+  ***'
 fi
 
 MAGISKTMP="$(magisk --path)/.magisk"
@@ -68,11 +75,19 @@ function replaceSystemProps_Old()
             "$MODPATH/system.prop"
 }
 
+function replaceSystemProps_VeryOld()
+{
+    sed -i \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=5000/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=5000/' \
+            "$MODPATH/system.prop"
+}
+
 function replaceSystemProps_Kona()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=20375/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=20375/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2750/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2750/' \
             "$MODPATH/system.prop"
 }
 
@@ -159,5 +174,7 @@ if "$IS64BIT"; then
             ;;
     esac
 else
-    replaceSystemProps_Old
+    replaceSystemProps_VeryOld
 fi
+
+rm -f "$MODPATH/LICENSE" "$MODPATH/README.md" "$MODPATH/changelog.md"
