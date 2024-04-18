@@ -18,8 +18,8 @@ function isMagiskMountCompatible()
 if ! isMagiskMountCompatible; then
     abort '  ***
   Aborted by no Magisk-mirrors:
-    Try again
-      a.) with official Magisk (mounting mirrors)
+    try again either
+      a.) with official Magisk (mounting mirrors), or
       b.) after installing "compatible Magisk-mirroring" Magisk module
   ***'
 fi
