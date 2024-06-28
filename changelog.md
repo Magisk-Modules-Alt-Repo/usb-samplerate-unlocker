@@ -1,9 +1,9 @@
 ## Change logs
 
-#v1.5.6
+# v1.5.6
 * Added "compatible Magisk-mirroring" message for incompatible Magisk variants
 
-#v1.5.5
+# v1.5.5
 * Tuned the USB period size for SDM845 devices (2500 usec to 2250 usec)
 * Tuned the USB period size for other devices (to 2250 usec)
 * Fixed logically wrong selinux prop settings (no meaning for magisk's magic mount mechanism)
