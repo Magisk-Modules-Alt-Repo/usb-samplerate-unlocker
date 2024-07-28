@@ -1,7 +1,7 @@
 ## Change logs
 
 # v1.5.7
-* Changed the default USB period_us from 2250usec to 2000 usec to optimize for 48 kHz Opus tracks (recent majority)
+* Changed the default USB period_us from 2250 usec to 2000 usec to optimize for 48 kHz Opus tracks (recent majority)
 
 # v1.5.6
 * Added "compatible Magisk-mirroring" message for incompatible Magisk variants
