@@ -1,5 +1,5 @@
-vendor.audio.usb.perio=3250
-vendor.audio.usb.out.period_us=3250
+vendor.audio.usb.perio=2000
+vendor.audio.usb.out.period_us=2000
 vendor.audio.usb.out.period_count=2
 vendor.audio_hal.period_size=120
 vendor.audio_hal.period_multiplier=1

@@ -20,7 +20,7 @@ if ! isMagiskMountCompatible; then
   Aborted by no Magisk-mirrors:
     try again either
       a.) with official Magisk (mounting mirrors), or
-      b.) after installing "compatible Magisk-mirroring" Magisk module
+      b.) after installing "compatible Magisk-mirroring" Magisk module and rebooting
   ***'
 fi
 
@@ -70,8 +70,8 @@ fi
 function replaceSystemProps_Old()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2250/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2250/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2000/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2000/' \
             "$MODPATH/system.prop"
 }
 
@@ -94,32 +94,32 @@ function replaceSystemProps_Kona()
 function replaceSystemProps_SDM845()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2250/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2250/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2000/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2000/' \
             "$MODPATH/system.prop"
 }
 
 function replaceSystemProps_SDM()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2250/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2250/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2000/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2000/' \
             "$MODPATH/system.prop"
 }
 
 function replaceSystemProps_Tensor()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2250/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2250/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2000/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2000/' \
             "$MODPATH/system.prop"
 }
 
 function replaceSystemProps_MTK_Dimensity()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2250/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2250/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2000/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2000/' \
             "$MODPATH/system.prop"
 }
 
