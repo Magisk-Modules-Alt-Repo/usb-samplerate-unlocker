@@ -1,5 +1,9 @@
 ## Change logs
 
+# v1.5.8
+* Added SM8635 ("pineapple") as a known max freq. device
+* Added a support for Tensor G4 (zuma pro)
+
 # v1.5.7
 * Changed the default USB period_us from 2250 usec to 2000 usec to optimize for 48 kHz Opus tracks (recent majority)
 

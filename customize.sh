@@ -149,11 +149,11 @@ if "$IS64BIT"; then
             replaceSystemProps_Kona
             enableMaxFrequency
             ;;
-        "sdm845" )
+        "sdm845" | "pineapple" )
             replaceSystemProps_SDM845
             enableMaxFrequency
             ;;
-        gs* | zuma )
+        gs* | zuma* )
             replaceSystemProps_Tensor
              ;;
         "sdm660" | "bengal" | "holi" )
