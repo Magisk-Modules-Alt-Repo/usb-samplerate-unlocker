@@ -19,7 +19,7 @@ if ! isMagiskMountCompatible; then
     abort '  ***
   Aborted by no Magisk-mirrors:
     try again either
-      a.) with official Magisk (mounting mirrors), or
+      a.) with official Magisk v27.0 (mounting mirrors), or
       b.) after installing "compatible Magisk-mirroring" Magisk module and rebooting
   ***'
 fi
@@ -78,8 +78,8 @@ function replaceSystemProps_Old()
 function replaceSystemProps_VeryOld()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=5000/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=5000/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=3875/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=3875/' \
             "$MODPATH/system.prop"
 }
 
