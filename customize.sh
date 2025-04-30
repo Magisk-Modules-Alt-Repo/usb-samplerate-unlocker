@@ -2,6 +2,30 @@
 
 [ -z "$(magisk --path)" ] && alias magisk='ksu-magisk'
 
+# Guards for my other modules
+if [ -e "${MODPATH%/*/*}/modules/hifi-maximizer-mod" ]; then
+    board="`getprop ro.board.platform`"
+    case "$board" in
+        gs* | zuma  )
+            abort '  ***
+  Aborted: detecting "Hifi maximizer" including all features of this module
+  ***'
+            ;;
+        "zumapro"  )
+            abort '  ***
+  Aborted: cannot support for AIDL only audio configuration devices
+  ***'
+            ;;
+        * )
+            ;;
+    esac
+fi
+if [ -e "${MODPATH%/*/*}/modules/audio-samplerate-changer" ]; then
+    abort '  ***
+  Aborted: detecting "Audio Samplerate Changer" including all features of this module
+  ***'
+fi
+
 # Check whether Magisk magic mount compatible or not
 function isMagiskMountCompatible()
 {
@@ -24,6 +48,14 @@ if ! isMagiskMountCompatible; then
   ***'
 fi
 
+function ui_print_replacelist()
+{
+    local f
+    for f in $1; do
+        ui_print "- Replace target file: $f"
+    done
+}
+
 MAGISKTMP="$(magisk --path)/.magisk"
 
 # Note: Don't use "${MAGISKTMP}/mirror/system/vendor/*" instaed of "${MAGISKTMP}/mirror/vendor/*".
@@ -32,6 +64,8 @@ MAGISKTMP="$(magisk --path)/.magisk"
 # Making dummies for replacing libalsautils.so's and audio_usb_aoc.so's
 
 REPLACE=""
+REPLACEFILES=""
+
 for d in "/system/vendor/lib" "/system/vendor/lib64"; do
     for lname in "libalsautils.so" "libalsautilsv2.so" "audio_usb_aoc.so"; do
         if [ -r "${d}/${lname}" ]; then
@@ -41,10 +75,10 @@ for d in "/system/vendor/lib" "/system/vendor/lib64"; do
             chcon u:object_r:vendor_file:s0 "${MODPATH}${d}/${lname}"
             chown root:root "${MODPATH}${d}/${lname}"
             chmod -R a+rX "${MODPATH}${d}"
-            if [ -z "${REPLACE}" ]; then
-                REPLACE="${d}/${lname}"
+            if [ -z "${REPLACEFILES}" ]; then
+                REPLACEFILES="${d}/${lname}"
             else
-                REPLACE="${REPLACE} ${d}/${lname}"
+                REPLACEFILES="${REPLACEFILES} ${d}/${lname}"
             fi
         fi
     done
@@ -60,10 +94,10 @@ if [ -r "$fname" ]; then
     chcon u:object_r:vendor_configs_file:s0 "${MODPATH}${fname}"
     chown root:root "${MODPATH}${fname}"
     chmod -R a+rX "${MODPATH}${fname%/*}"
-    if [ -z "${REPLACE}" ]; then
-        REPLACE="${fname}"
+    if [ -z "${REPLACEFILES}" ]; then
+        REPLACEFILES="${fname}"
     else
-        REPLACE="${REPLACE} ${fname}"
+        REPLACEFILES="${REPLACEFILES} ${fname}"
     fi
 fi
 
@@ -86,8 +120,8 @@ function replaceSystemProps_VeryOld()
 function replaceSystemProps_Kona()
 {
     sed -i \
-        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=2750/' \
-        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=2750/' \
+        -e 's/vendor\.audio\.usb\.perio=.*$/vendor\.audio\.usb\.perio=4000/' \
+        -e 's/vendor\.audio\.usb\.out\.period_us=.*$/vendor\.audio\.usb\.out\.period_us=4000/' \
             "$MODPATH/system.prop"
 }
 
@@ -178,3 +212,4 @@ else
 fi
 
 rm -f "$MODPATH/LICENSE" "$MODPATH/README.md" "$MODPATH/changelog.md"
+ui_print_replacelist "${REPLACEFILES}"

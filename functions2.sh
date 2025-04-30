@@ -54,7 +54,7 @@ function patchClearLock()
     local orig_rates='96000  88200  192000  176400  48000  44100  32000  24000  22050  16000  12000  11025  8000'
     local new_rates='192000  176400  96000  88200  48000  44100  32000  24000  22050  16000  12000  11025  8000'
     
-    if [ $# -ge 2  -a  -r "$1"  -a  -w "$2" ]; then
+    if [ $# -ge 2  -a  -r "$1" ]; then
         if [ $# -gt 2 ]; then
             case "$3" in
                 "max" )
@@ -105,7 +105,7 @@ function patchClearOffloadLock()
     local orig_rates='384000  352800  192000  176400  96000  88200  64000  48000  44100  32000  22050  16000  11025  8000'
     local new_rates='768000  705600  384000  352800  192000  176400  96000  88200  48000  44100  22050  16000  11025  8000'
     
-    if [ $# -ge 2  -a  -r "$1"  -a  -w "$2" ]; then
+    if [ $# -ge 2  -a  -r "$1" ]; then
         local pat1=`toHexLineLE "$orig_rates"`
         local pat2=`toHexLineLE "$new_rates"`
       
@@ -140,7 +140,7 @@ function patchClearTensorOffloadLock()
     local orig_rates='192000  96000  48000  44100  32000  24000  22050  16000  12000  11025  8000'
     local new_rates='768000  705600  384000  352800  192000  176400  96000  88200  48000  44100  8000'
 
-    if [ $# -ge 2  -a  -r "$1"  -a  -w "$2" ]; then
+    if [ $# -ge 2  -a  -r "$1" ]; then
         local pat1=`toHexLineLE "$orig_rates"`
         local pat2=`toHexLineLE "$new_rates"`
 
