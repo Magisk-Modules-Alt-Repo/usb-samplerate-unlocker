@@ -1,5 +1,8 @@
 ## Change logs
 
+# v1.5.10
+* Changed an error message for no Magisk mirrors
+
 # v1.5.9
 * Tuned for POCO F3 (Android 15)
 
