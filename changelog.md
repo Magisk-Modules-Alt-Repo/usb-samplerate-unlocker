@@ -1,5 +1,8 @@
 ## Change logs
 
+# v1.5.11
+* Added Pixel 6's as a known max freq. device
+
 # v1.5.10
 * Changed an error message for no Magisk mirrors
 

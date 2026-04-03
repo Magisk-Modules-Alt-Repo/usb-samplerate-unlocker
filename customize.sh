@@ -190,6 +190,7 @@ if "$IS64BIT"; then
             ;;
         gs* | zuma* )
             replaceSystemProps_Tensor
+            enableMaxFrequency
              ;;
         "sdm660" | "bengal" | "holi" )
             replaceSystemProps_SDM
